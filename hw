@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+class Fraction
+{
+private:
+  int numerator;
+  int denominator;
+
+public:
+  void Init(int x, int y)
+  {
+    numerator = x;
+    denominator = y;
+  }
+  void Print()
+  {
+    cout << numerator << "/" << denominator << endl;
+  }
+  void Sum(Fraction &sum)
+  {
+    cout << "NUM: " << numerator + sum.numerator << "\tDEN: " << denominator + sum.denominator;
+  }
+  void Min(Fraction &min)
+  {
+    cout << "NUM: " << numerator - min.numerator << "\tDEN: " << denominator - min.denominator;
+  }
+  void Mul(Fraction &mul)
+  {
+    cout << "NUM: " << numerator * mul.numerator << "\tDEN: " << denominator * mul.denominator;
+  }
+  void Div(Fraction &div)
+  {
+    cout << "NUM: " << numerator / div.numerator << "\tDEN: " << denominator / div.denominator;
+  }
+};
+int main()
+{
+  Fraction x;
+  x.Init(12, 4);
+  x.Print();
+
+  Fraction y;
+  y.Init(10, 5);
+  y.Print();
+  x.Sum(y);
+  x.Min(y);
+  x.Mul(y);
+  x.Div(y);
+}
