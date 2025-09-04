@@ -1,0 +1,133 @@
+#include <iostream>
+using namespace std;
+class Car
+{
+private:
+  char *model;
+  char *country;
+  char *color;
+  int year;
+  double price;
+
+public:
+  Car()
+  {
+    model = nullptr;
+    country = nullptr;
+    color = nullptr;
+    int year = 0;
+    price = 0.0;
+  }
+  Car(const char *m, const char *c, const char *col, int y, double p)
+  {
+    model = new char[strlen(m) + 1];
+    strcpy(model, m);
+    country = new char[strlen(c) + 1];
+    strcpy(country, c);
+    color = new char[strlen(col) + 1];
+    strcpy(color, col);
+    year = y;
+    price = p;
+  }
+  void Init(const char *m, const char *c, const char *col, int y, double p)
+  {
+    if (model != nullptr)
+    {
+      delete[] model;
+    }
+    model = new char[strlen(m) + 1];
+    strcpy(model, m);
+
+    if (country != nullptr)
+    {
+      delete[] country;
+    }
+    country = new char[strlen(c) + 1];
+    strcpy(country, c);
+
+    if (color != nullptr)
+    {
+      delete[] color;
+    }
+    color = new char[strlen(col) + 1];
+    strcpy(color, col);
+
+    year = y;
+    price = p;
+  }
+  void Print()
+  {
+    cout << "INFO: " << endl;
+    cout << "MODEL: " << model << endl;
+    cout << "COUNTRY: " << country << endl;
+    cout << "COLOR: " << color << endl;
+    cout << "YEAR: " << year << endl;
+    cout << "PRICE: " << price << endl;
+  }
+  ~Car()
+  {
+    delete[] model;
+    delete[] country;
+    delete[] color;
+  }
+  const char *GetModel()
+  {
+    return model;
+  }
+  const char *GetCountry()
+  {
+    return country;
+  }
+  const char *GetCol()
+  {
+    return color;
+  }
+  int GetY()
+  {
+    return year;
+  }
+  int GetPr()
+  {
+    return price;
+  }
+  void SetModel(const char *m)
+  {
+    delete[] model;
+    model = new char[strlen(m) + 1];
+    strcpy(model, m);
+  }
+  void SetCountry(const char *c)
+  {
+    delete[] country;
+    country = new char[strlen(c) + 1];
+    strcpy(country, c);
+  }
+  void SetColor(const char *col)
+  {
+    delete[] color;
+    color = new char[strlen(col) + 1];
+    strcpy(color, col);
+  }
+  void SetY(int y)
+  {
+    year = y;
+  }
+  void SetPrice(double p)
+  {
+    price = p;
+  }
+};
+int main()
+{
+  Car car1;
+  car1.Init("Dodge", "USA", "Black", 2020, 50000);
+  car1.SetColor("White");
+  cout << "Changed in car 1: " << car1.GetCol() << endl;
+  car1.Print();
+
+  Car car2;
+  car2.Init("Audi", "German", "Night Blue", 2024, 40000);
+  car2.SetPrice(53900);
+  cout << "Changed in car 2: " << car2.GetPr() << endl;
+  car2.Print();
+}
