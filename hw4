@@ -1,0 +1,164 @@
+#include <iostream>
+using namespace std;
+class Laptop
+{
+private:
+  char *model;
+  char *color;
+  double size;
+  double price;
+
+public:
+  Laptop();
+  Laptop(double s, double pr);
+  Laptop(const char *m, double s, double pr);
+  Laptop(const char *m, const char *c, double s, double pr);
+  void Print();
+  void Init(const char *m, const char *c, double s, double pr);
+  ~Laptop();
+  const char *GetM();
+  const char *GetC();
+  double GetS();
+  double GetPr();
+  void SetM(const char *m);
+  void SetC(const char *c);
+  void SetS(double s);
+  void SetPr(double pr);
+  void Output();
+};
+Laptop::Laptop()
+{
+  model = nullptr;
+  color = nullptr;
+  size = 0.0;
+  price = 0.0;
+  cout << "INFO: " << endl;
+}
+Laptop::Laptop(double s, double pr)
+{
+  size = s;
+  price = pr;
+}
+Laptop::Laptop(const char *m, double s, double pr) : Laptop(s, pr)
+{
+  model = new char[strlen(m) + 1];
+  strcpy(model, m);
+}
+Laptop::Laptop(const char *m, const char *c, double s, double pr) : Laptop(m, s, pr)
+{
+  model = new char[strlen(m) + 1];
+  strcpy(model, m);
+
+  color = new char[strlen(c) + 1];
+  strcpy(color, c);
+
+  size = s;
+
+  price = pr;
+}
+void Laptop::Print()
+{
+  cout << "MODEL: " << model << endl;
+  cout << "COLOR: " << color << endl;
+  cout << "SIZE: " << size << endl;
+  cout << "PRICE: " << price << endl;
+}
+void Laptop::Init(const char *m, const char *c, double s, double pr)
+{
+  if (model != nullptr)
+  {
+    delete[] model;
+  }
+  model = new char[strlen(m) + 1];
+  strcpy(model, m);
+
+  if (color != c)
+  {
+    delete[] color;
+  }
+  color = new char[strlen(c) + 1];
+  strcpy(color, c);
+  size = s;
+  price = pr;
+}
+
+const char *Laptop::GetC()
+{
+  return color;
+}
+double Laptop::GetS()
+{
+  return size;
+}
+double Laptop::GetPr()
+{
+  return price;
+}
+void Laptop::SetM(const char *m)
+{
+  delete[] model;
+  model = new char[strlen(m) + 1];
+  strcpy(model, m);
+}
+void Laptop::SetC(const char *c)
+{
+  delete[] color;
+  color = new char[strlen(c) + 1];
+  strcpy(color, c);
+}
+void Laptop::SetS(double s)
+{
+  size = s;
+}
+void Laptop::SetPr(double pr)
+{
+  price = pr;
+}
+void Laptop::Output()
+{
+  char val[256];
+  cout << "ENTER MODEL: ";
+  cin.getline(val, 256);
+  model = new char[strlen(val) + 1];
+  strcpy(model, val);
+
+  cout << "ENTER COLOR: ";
+  cin.getline(val, 256);
+  color = new char[strlen(val) + 1];
+  strcpy(color, val);
+
+  cout << "ENTER SIZE:";
+  cin >> size;
+
+  cout << "ENTER PRICE: ";
+  cin >> price;
+}
+Laptop::~Laptop()
+{
+  delete[] model;
+  delete[] color;
+}
+const char *Laptop::GetM()
+{
+  return model;
+}
+
+int main()
+{
+  Laptop n1;
+  cout << "LP 1:" << endl;
+  n1.Init("HP", "Silver", 13, 340);
+  n1.SetS(19);
+  cout << n1.GetS() << endl;
+  n1.Print();
+
+  cout << "LP 2:" << endl;
+  Laptop n2{"Asus", "Black", 16, 280};
+  n2.SetM("Microsoft");
+  cout << n2.GetM() << endl;
+  n2.Print();
+
+  Laptop n3;
+  cout << "LP 2:" << endl;
+  n3.Output();
+}
